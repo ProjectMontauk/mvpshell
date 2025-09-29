@@ -2,91 +2,54 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { useReadContract } from "thirdweb/react";
-import { getContract } from "thirdweb";
-import { client } from "../src/client";
-import { base } from "thirdweb/chains";
-import { getAllMarkets, Market } from "../src/data/markets";
-
-// MarketCard component that fetches its own odds
-const MarketCard = ({ market }: { market: Market }) => {
-  const router = useRouter();
-  
-  // Create contract instance for this specific market
-  const marketContractInstance = getContract({
-    client,
-    chain: base,
-    address: market.contractAddress,
-  });
-
-  // Fetch current odds for Yes (0) and No (1) positions for this specific market
-  const { data: oddsYes } = useReadContract({
-    contract: marketContractInstance,
-    method: "function odds(uint256 _outcome) view returns (int128)",
-    params: [0n],
-  });
-  
-  const { data: oddsNo } = useReadContract({
-    contract: marketContractInstance,
-    method: "function odds(uint256 _outcome) view returns (int128)",
-    params: [1n],
-  });
-
-  // Convert odds to probabilities
-  const yesProbability = oddsYes !== undefined ? Number(oddsYes) / Math.pow(2, 64) : 0;
-  const noProbability = oddsNo !== undefined ? Number(oddsNo) / Math.pow(2, 64) : 0;
-
-  return (
-    <div
-      className="bg-white rounded-xl shadow border border-gray-200 p-5 w-full sm:w-1/2 cursor-pointer hover:shadow-lg transition"
-      onClick={() => router.push(`/markets/${market.id}`)}
-      role="button"
-      tabIndex={0}
-      onKeyPress={e => { if (e.key === 'Enter') router.push(`/markets/${market.id}`); }}
-    >
-      <div className="mb-4">
-        <Image
-          src={market.image}
-          alt={market.title}
-          width={400}
-          height={200}
-          className="w-full h-48 rounded-lg object-cover object-top"
-        />
-      </div>
-      <div className="mb-3">
-        <h3 className="text-xl font-bold text-gray-900">{market.title}</h3>
-      </div>
-      <div className="mb-0">
-        <div className="grid grid-cols-4 gap-2 items-center">
-          <div className="text-sm font-semibold text-black col-span-3">{market.outcomes[0]}:</div>
-          <div className="text-lg font-bold text-green-600 text-center bg-green-100 rounded px-2 py-1">
-            {yesProbability > 0 ? `${Math.round(yesProbability * 100)}%` : '--'}
-          </div>
-          <div className="text-sm font-semibold text-black col-span-3">{market.outcomes[1]}:</div>
-          <div className="text-lg font-bold text-red-600 text-center bg-red-100 rounded px-2 py-1">
-            {noProbability > 0 ? `${Math.round(noProbability * 100)}%` : '--'}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { getAllMarkets } from "../src/data/markets";
+import MarketCard from "./MarketCard";
 
 const Homepage = () => {
   // Get all markets
   const markets = getAllMarkets();
-  
+  const router = useRouter();
+
   return (
-    <div className="min-h-screen bg-[#f8f9fa] flex flex-col items-center w-full pt-5 md:pt-10">
-              <h1 className="text-2xl md:text-4xl font-bold mb-1 md:mb-4 text-left pl-5 md:text-center md:pl-0 w-full">Welcome to The Citizen!</h1>
-      <div className="text-base md:text-xl text-gray-600 mb-0 text-left pl-5 md:text-center md:pl-0 w-full">
-        A home for honest debate about anything.
-        <br />
-        Bet on what you believe, challenge convention, and earn for being right.
+    <div className="min-h-screen bg-[#f8f9fa] flex flex-col w-full">
+      {/* Hero Section */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+              <span className="block">Welcome to The Citizen!</span>
+              <span className="block text-blue-500">
+                Bet on What You Believe
+              </span>
+            </h1>
+            <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
+              A home for honest debate about anything. Bet on what you believe,
+              challenge convention, and earn for being right.
+            </p>
+            <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+              <div className="rounded-md shadow">
+                <button
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 md:py-4 md:text-lg md:px-10"
+                  onClick={() => router.push("/markets")}
+                >
+                  Get Started
+                </button>
+              </div>
+              <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                <button
+                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-500 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+                  onClick={() => router.push("/market-ideas")}
+                >
+                  Learn More
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       {/* Active Markets Section */}
-      <div className="w-full flex flex-col items-center mt-2 md:mt-5">
+      <div className="w-full flex flex-col items-center pt-5 md:pt-10">
         <div className="flex flex-col gap-6 w-full max-w-5xl">
           {/* First row - JFK and Moon Landing */}
           <div className="flex flex-col sm:flex-row gap-6 w-full">
@@ -125,4 +88,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage; 
+export default Homepage;

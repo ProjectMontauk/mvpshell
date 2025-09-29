@@ -1,11 +1,15 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { ConnectButton, useActiveAccount, useReadContract } from "thirdweb/react";
+import {
+  ConnectButton,
+  useActiveAccount,
+  useReadContract,
+} from "thirdweb/react";
 import { client } from "../src/client";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { tokenContract, getContractsForMarket } from "../constants/contracts";
-import { inAppWallet} from "thirdweb/wallets";
+import { inAppWallet } from "thirdweb/wallets";
 import { base } from "thirdweb/chains";
 import { readContract } from "thirdweb";
 import { usePortfolio } from "../src/contexts/PortfolioContext";
@@ -46,17 +50,26 @@ function formatBalance(balance: bigint | undefined): string {
   if (!balance) return "0";
   // Divide by 10^18 and show decimal places only when needed
   const amount = Number(balance) / 1e18;
-  return amount % 1 === 0 
+  return amount % 1 === 0
     ? amount.toLocaleString(undefined, { maximumFractionDigits: 0 })
-    : amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    : amount.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
 }
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
   const account = useActiveAccount();
   const { portfolioValue, setPortfolioValue } = usePortfolio();
   const [portfolioLoading, setPortfolioLoading] = useState(false);
-  const { data: balance, isPending, refetch } = useReadContract({
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const {
+    data: balance,
+    isPending,
+    refetch,
+  } = useReadContract({
     contract: tokenContract,
     method: "function balanceOf(address account) view returns (uint256)",
     params: [account?.address ?? "0x0000000000000000000000000000000000000000"],
@@ -65,16 +78,51 @@ const Navbar = () => {
   // Debug balance changes
   useEffect(() => {
     if (account?.address) {
-      console.log('Navbar balance debug:', {
+      console.log("Navbar balance debug:", {
         account: account.address,
         balance: balance?.toString(),
-        balanceNumber: balance ? Number(balance) / 1e18 : 'undefined',
-        isPending
+        balanceNumber: balance ? Number(balance) / 1e18 : "undefined",
+        isPending,
       });
     }
   }, [account?.address, balance, isPending]);
 
-  const isDevelopment = process.env.NODE_ENV !== 'production';
+  const isDevelopment = process.env.NODE_ENV !== "production";
+
+  // Function to get button styling based on current path
+  const getButtonStyling = (route: string) => {
+    const isActive =
+      pathname === route ||
+      (route === "/markets" && pathname.startsWith("/markets/")) ||
+      (route === "/market-ideas" && pathname === "/market-ideas");
+
+    return isActive
+      ? "border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium";
+  };
+
+  // Function to get mobile menu item styling
+  const getMobileButtonStyling = (route: string) => {
+    const isActive =
+      pathname === route ||
+      (route === "/markets" && pathname.startsWith("/markets/")) ||
+      (route === "/market-ideas" && pathname === "/market-ideas");
+
+    return isActive
+      ? "block px-3 py-2 text-base font-medium text-blue-600 bg-blue-50 border-l-4 border-blue-500"
+      : "block px-3 py-2 text-base font-medium text-gray-500 hover:text-gray-700 hover:bg-gray-50";
+  };
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Handle mobile navigation
+  const handleMobileNavigation = (route: string) => {
+    router.push(route);
+    setIsMobileMenuOpen(false);
+  };
 
   const wallets = isDevelopment
     ? [
@@ -124,30 +172,36 @@ const Navbar = () => {
 
     try {
       const positions: CurrentPosition[] = [];
-      const { getAllMarkets } = await import('../src/data/markets');
+      const { getAllMarkets } = await import("../src/data/markets");
       const markets = getAllMarkets();
 
       for (const market of markets) {
         try {
-          const { conditionalTokensContract, outcome1PositionId, outcome2PositionId } = getContractsForMarket(market.id);
-          
+          const {
+            conditionalTokensContract,
+            outcome1PositionId,
+            outcome2PositionId,
+          } = getContractsForMarket(market.id);
+
           // Fetch Yes shares balance
           const yesBalance = await readContract({
             contract: conditionalTokensContract,
-            method: "function balanceOf(address account, uint256 id) view returns (uint256)",
+            method:
+              "function balanceOf(address account, uint256 id) view returns (uint256)",
             params: [
               account.address as `0x${string}`,
-              BigInt(outcome1PositionId)
+              BigInt(outcome1PositionId),
             ],
           });
 
           // Fetch No shares balance
           const noBalance = await readContract({
             contract: conditionalTokensContract,
-            method: "function balanceOf(address account, uint256 id) view returns (uint256)",
+            method:
+              "function balanceOf(address account, uint256 id) view returns (uint256)",
             params: [
               account.address as `0x${string}`,
-              BigInt(outcome2PositionId)
+              BigInt(outcome2PositionId),
             ],
           });
 
@@ -195,13 +249,16 @@ const Navbar = () => {
             });
           }
         } catch (error) {
-          console.error(`Failed to fetch positions for market ${market.id}:`, error);
+          console.error(
+            `Failed to fetch positions for market ${market.id}:`,
+            error
+          );
         }
       }
 
       return positions;
     } catch (error) {
-      console.error('Failed to fetch current positions:', error);
+      console.error("Failed to fetch current positions:", error);
       return [];
     }
   }, [account?.address]);
@@ -215,7 +272,8 @@ const Navbar = () => {
         return;
       }
       // Check if we already have a valid portfolio value from global state
-      const hasValidValue = portfolioValue !== "--" && !isNaN(Number(portfolioValue));
+      const hasValidValue =
+        portfolioValue !== "--" && !isNaN(Number(portfolioValue));
       // Only show loading and fetch new data if we don't have a valid value
       if (!hasValidValue) {
         setPortfolioLoading(true);
@@ -225,7 +283,10 @@ const Navbar = () => {
         // Fetch current positions using the same method as portfolio page
         const currentPositions = await fetchCurrentPositions();
         // Calculate total positions value using current positions
-        const totalPositionsValue = currentPositions.reduce((sum, position) => sum + position.positionValue, 0);
+        const totalPositionsValue = currentPositions.reduce(
+          (sum, position) => sum + position.positionValue,
+          0
+        );
         const totalPortfolio = cash + totalPositionsValue;
         const newPortfolioValue = totalPortfolio.toFixed(2);
         // Only update if the value has actually changed
@@ -234,14 +295,20 @@ const Navbar = () => {
         }
         setPortfolioLoading(false);
       } catch (error) {
-        console.error('Failed to load portfolio value:', error);
+        console.error("Failed to load portfolio value:", error);
         setPortfolioValue("--");
         setPortfolioLoading(false);
       }
     };
     loadPortfolioValue();
     // Only update when account or balance changes
-  }, [account?.address, balance, fetchCurrentPositions, portfolioValue, setPortfolioValue]);
+  }, [
+    account?.address,
+    balance,
+    fetchCurrentPositions,
+    portfolioValue,
+    setPortfolioValue,
+  ]);
 
   // Force portfolio value refresh when balance changes from 0 to positive (e.g., after auto-deposit)
   const prevBalanceRef = useRef<number>(0);
@@ -255,76 +322,221 @@ const Navbar = () => {
   }, [balance]);
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white">
-      <div className="max-w-[1600px] mx-auto w-full flex items-center justify-between px-4 md:px-8 py-1">
-        <div className="ml-0 flex flex-col items-start">
-          <h1 className="text-3xl font-bold text-[#171A22] mt-4">The Citizen</h1>
-          <div className="flex gap-0 md:gap-0 mt-1 -ml-2">
+    <nav className="bg-white shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <div className="flex-shrink-0 flex items-center">
+              <button
+                onClick={() => router.push("/")}
+                className="text-xl font-bold text-blue-500 hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                The Citizen
+              </button>
+            </div>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+              <button
+                className={getButtonStyling("/markets")}
+                onClick={() => router.push("/markets")}
+              >
+                Markets
+              </button>
+              <button
+                className={getButtonStyling("/market-ideas")}
+                onClick={() => router.push("/market-ideas")}
+              >
+                New
+              </button>
+              <button
+                className={getButtonStyling("/portfolio")}
+                onClick={() => router.push("/portfolio")}
+              >
+                Portfolio
+              </button>
+              <button
+                className={getButtonStyling("/deposit")}
+                onClick={() => router.push("/deposit")}
+              >
+                Deposit
+              </button>
+            </div>
+          </div>
+          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            {/* Portfolio Value Display */}
+            <div className="flex items-center space-x-4">
+              <div className="flex flex-col items-center">
+                <span className="text-gray-900 font-medium text-sm">
+                  Portfolio
+                </span>
+                <span className="text-green-600 font-semibold text-sm">
+                  {portfolioLoading || portfolioValue === "--" ? (
+                    <>
+                      <DenariusSymbol size={10} />
+                      --
+                    </>
+                  ) : (
+                    <>
+                      <DenariusSymbol size={10} />
+                      {Number(portfolioValue).toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })}
+                    </>
+                  )}
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span className="text-gray-900 font-medium text-sm">Cash</span>
+                <span className="text-green-600 font-semibold text-sm">
+                  {!account?.address || isPending ? (
+                    <>
+                      <DenariusSymbol size={10} />
+                      --
+                    </>
+                  ) : (
+                    <>
+                      <DenariusSymbol size={10} />
+                      {formatBalance(balance)}
+                    </>
+                  )}
+                </span>
+              </div>
+            </div>
+            <div className="ml-4">
+              <ConnectButton
+                client={client}
+                wallets={wallets}
+                connectButton={{
+                  label: "Sign In",
+                  className:
+                    "px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50",
+                }}
+              />
+            </div>
+          </div>
+          <div className="-mr-2 flex items-center sm:hidden">
             <button
-              className="py-1 px-1 md:px-2 bg-white text-[#171A22] rounded-md text-[10px] md:text-sm font-semibold hover:bg-gray-100 transition border-none shadow-none text-left whitespace-nowrap"
-              style={{ minWidth: 0 }}
-              onClick={() => router.push("/markets")}
+              type="button"
+              onClick={toggleMobileMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
             >
-              All Markets
+              {isMobileMenuOpen ? (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
             </button>
+          </div>
+        </div>
+      </div>
 
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="sm:hidden">
+          <div className="pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
             <button
-              className="py-1 px-1 md:px-2 bg-white text-[#171A22] rounded-md text-[10px] md:text-sm font-semibold hover:bg-gray-100 transition border-none shadow-none text-left whitespace-nowrap"
-              style={{ minWidth: 0 }}
-              onClick={() => router.push("/market-ideas")}
+              onClick={() => handleMobileNavigation("/markets")}
+              className={getMobileButtonStyling("/markets")}
             >
-              New
+              Markets
             </button>
             <button
-              className="py-1 px-1 md:px-2 bg-white text-[#171A22] rounded-md text-[10px] md:text-sm font-semibold hover:bg-gray-100 transition border-none shadow-none text-left whitespace-nowrap"
-              style={{ minWidth: 0 }}
-              onClick={() => router.push("/portfolio")}
+              onClick={() => handleMobileNavigation("/market-ideas")}
+              className={getMobileButtonStyling("/market-ideas")}
+            >
+              New Ideas
+            </button>
+            <button
+              onClick={() => handleMobileNavigation("/portfolio")}
+              className={getMobileButtonStyling("/portfolio")}
             >
               Portfolio
             </button>
             <button
-              className="py-1 px-1 md:px-2 bg-white text-[#171A22] rounded-md text-[10px] md:text-sm font-semibold hover:bg-gray-100 transition border-none shadow-none text-left whitespace-nowrap"
-              style={{ minWidth: 0 }}
-              onClick={() => router.push("/deposit")}
+              onClick={() => handleMobileNavigation("/deposit")}
+              className={getMobileButtonStyling("/deposit")}
             >
               Deposit
             </button>
           </div>
-        </div>
-        <div className="flex items-center gap-0">
-          <button
-            className="hidden md:flex flex-col items-center justify-center bg-white px-2 py-1 rounded transition-colors duration-200 cursor-pointer focus:outline-none hover:bg-gray-200"
-            style={{ boxShadow: "none", minWidth: 0 }}
-            onClick={() => router.push("/portfolio")}
-          >
-            <span className="text-[#171A22] font-medium text-sm">Portfolio</span>
-                            <span className="text-green-600 font-semibold text-sm">
-                  {portfolioLoading || portfolioValue === "--" ? <><DenariusSymbol size={10} />--</> : <><DenariusSymbol size={10} />{Number(portfolioValue).toLocaleString(undefined, { maximumFractionDigits: 2 })}</>}
+
+          {/* Mobile Portfolio Info */}
+          <div className="pt-4 pb-3 border-t border-gray-200 bg-gray-50">
+            <div className="px-4 space-y-3">
+              <div className="flex justify-between">
+                <span className="text-gray-900 font-medium text-sm">
+                  Portfolio
                 </span>
-          </button>
-          <button
-            className="hidden md:flex flex-col items-center justify-center bg-white px-2 py-1 pr-4 m-0 p-0 rounded transition-colors duration-200 cursor-pointer focus:outline-none hover:bg-gray-200 text-center"
-            style={{ boxShadow: "none", minWidth: 0, margin: 0 }}
-            onClick={() => router.push("/portfolio")}
-          >
-                            <span className="text-[#171A22] font-medium text-sm">Cash</span>
-                            <span className="text-green-600 font-semibold text-sm">
-                  {(!account?.address || isPending) ? <><DenariusSymbol size={10} />--</> : <><DenariusSymbol size={10} />{formatBalance(balance)}</>}
+                <span className="text-green-600 font-semibold text-sm">
+                  {portfolioLoading || portfolioValue === "--" ? (
+                    <>
+                      <DenariusSymbol size={10} />
+                      --
+                    </>
+                  ) : (
+                    <>
+                      <DenariusSymbol size={10} />
+                      {Number(portfolioValue).toLocaleString(undefined, {
+                        maximumFractionDigits: 2,
+                      })}
+                    </>
+                  )}
                 </span>
-          </button>
-          <div className="flex scale-75 origin-left">
-            <ConnectButton 
-              client={client} 
-              wallets={wallets} 
-              connectButton={{
-                label: "Sign In",
-                className: "bg-black text-white px-4 py-2 rounded transition-colors duration-200 focus:outline-none hover:bg-gray-800 text-xs font-semibold m-0"
-              }}
-            />
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-900 font-medium text-sm">Cash</span>
+                <span className="text-green-600 font-semibold text-sm">
+                  {!account?.address || isPending ? (
+                    <>
+                      <DenariusSymbol size={10} />
+                      --
+                    </>
+                  ) : (
+                    <>
+                      <DenariusSymbol size={10} />
+                      {formatBalance(balance)}
+                    </>
+                  )}
+                </span>
+              </div>
+              <div className="pt-2">
+                <ConnectButton
+                  client={client}
+                  wallets={wallets}
+                  connectButton={{
+                    label: "Sign In",
+                    className:
+                      "w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600",
+                  }}
+                />
+              </div>
+            </div>
           </div>
-          {/* Example: <InAppWalletButton /> */}
         </div>
-      </div>
+      )}
     </nav>
   );
 };
