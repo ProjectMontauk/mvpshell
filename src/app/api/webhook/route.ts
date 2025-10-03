@@ -9,25 +9,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET!;
 
 export async function POST(request: NextRequest) {
-  console.log('🔄 Webhook received! Processing...');
-  console.log('📍 Request method:', request.method);
-  console.log('🌐 Request URL:', request.url);
   
   let body: string;
   let sig: string | null;
   
   try {
     body = await request.text();
-    console.log('📝 Request body length:', body.length);
-    console.log('📄 Request body preview:', body.substring(0, 200) + '...');
     
     const headersList = await headers();
     sig = headersList.get('stripe-signature');
-    console.log('🔑 Stripe signature present:', !!sig);
-    console.log('🔑 Stripe signature value:', sig ? sig.substring(0, 50) + '...' : 'None');
     
-    // Log all headers for debugging
-    console.log('📋 All headers:', Object.fromEntries(headersList.entries()));
   } catch (error) {
     console.error('❌ Error reading request:', error);
     return NextResponse.json({ error: 'Failed to read request' }, { status: 400 });

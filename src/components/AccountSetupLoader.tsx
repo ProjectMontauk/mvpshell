@@ -3,6 +3,7 @@ import { prepareContractCall } from "thirdweb";
 import { tokenContract } from "../../constants/contracts";
 import { parseAmountToWei } from "../utils/parseAmountToWei";
 import { useState, useEffect, useRef } from "react";
+import DenariusSymbol from "./DenariusSymbol";
 
 export default function AccountSetupLoader() {
   const account = useActiveAccount();
@@ -162,7 +163,7 @@ export default function AccountSetupLoader() {
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Creating Your Account</h2>
               <p className="text-gray-600 mb-4">
-                  Setting up your account and minting 𐆖100 of test funds so you can start trading!
+                  Setting up your account and minting <DenariusSymbol size={10.5} />100 of test funds so you can start trading!
               </p>
             </>
           ) : showTerms ? (
@@ -178,7 +179,7 @@ export default function AccountSetupLoader() {
                   <strong>Please read carefully before proceeding:</strong>
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• 𐆖 (Nash) is an <strong>in-game currency</strong> used exclusively within The Citizen platform</li>
+                  <li>• <DenariusSymbol size={10} /> (Nash) is an <strong>in-game currency</strong> used exclusively within The Citizen platform</li>
                   <li>• These tokens are <strong>NOT redeemable</strong> for real money or any real-world value</li>
                   <li>• Test funds are provided for demonstration and trading practice purposes only</li>
                   <li>• By proceeding, you acknowledge that you understand these are virtual tokens with no monetary value</li>
@@ -207,7 +208,7 @@ export default function AccountSetupLoader() {
               </div>
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Welcome to The Citizen!</h2>
               <p className="text-gray-600">
-                Your account has been created and 𐆖100 of test funds has been deposited. You&apos;ve agreed to our terms and are ready to start trading!
+                Your account has been created and <DenariusSymbol size={10} />100 of test funds has been deposited. You&apos;ve agreed to our terms and are ready to start trading!
               </p>
             </>
           )}
