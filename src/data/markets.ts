@@ -62,7 +62,7 @@ export const markets: Market[] = [
     image: "/MRNATurboCancer.png", // Placeholder image - you'll need to add this image
     contractAddress: "0xdc57601061c30DCdFbE849e2440CC36A929C7205", // MRNA TurboCancer Market Contract on Base
     outcomes: ["Yes, MRNA vax linked to cancer", "No, MRNA vax not linked to cancer"],
-    rules: "The market will resolve 'Yes' if individuals who received COVID-19 mRNA vaccinations show an increase in cancer rates compared to unvaccinated individuals. Otherwise, the market will resolve 'No.' Indicating that COVID-19 mRNA vaccinations do not cause a rise in cancer rates. The resolution will occur once verifiable evidence or consensus is established after the discovery period ends on March 8, 2026."
+    rules: "The market will resolve 'Yes' if individuals who received COVID-19 mRNA vaccinations show an increase in cancer rates compared to unvaccinated individuals. Otherwise, the market will resolve 'No.' Indicating that COVID-19 mRNA vaccinations do not cause a rise in cancer rates. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
   }
 ];
 
