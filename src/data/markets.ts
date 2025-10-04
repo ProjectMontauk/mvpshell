@@ -44,7 +44,7 @@ export const markets: Market[] = [
     image: "/RFK.png", // Placeholder image until we add the actual photo
     contractAddress: "0x9db8664c16dcffb5b1bb8cde365fd174d46b3c25", // Vaccines Autism Market Contract on Base
     outcomes: ["Yes, childhood vaccines linked to autism", "No, childhood vaccines not linked to autism"],
-    rules: "The market will resolve 'Yes' if children following the CDC-recommended childhood vaccine schedule (as of September 18, 2025, linked below) have a higher likelihood of developing Autism Spectrum Disorder over their lifetime compared to unvaccinated children. Otherwise, the market will resolve 'No.' This means children vaccinated according to the CDC schedule are not more likely to develop Autism, the market will resolve 'No.'"
+    rules: "The market will resolve 'Yes' if children following the CDC-recommended childhood vaccine schedule (as of September 18, 2025, linked below) have a higher likelihood of developing Autism Spectrum Disorder over their lifetime compared to unvaccinated children. Otherwise, the market will resolve 'No.' This means children vaccinated according to the CDC schedule are not more likely to develop Autism. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
   },
   {
     id: 'trump-epstein',
