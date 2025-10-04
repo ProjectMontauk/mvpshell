@@ -179,7 +179,7 @@ export default function AccountSetupLoader() {
                   <strong>Please read carefully before proceeding:</strong>
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>• <DenariusSymbol size={10} /> (Nash) is an <strong>in-game currency</strong> used exclusively within The Citizen platform</li>
+                  <li>• <DenariusSymbol size={10.5} /> (Nash) is an <strong>in-game currency</strong> used exclusively within The Citizen platform</li>
                   <li>• These tokens are <strong>NOT redeemable</strong> for real money or any real-world value</li>
                   <li>• Test funds are provided for demonstration and trading practice purposes only</li>
                   <li>• By proceeding, you acknowledge that you understand these are virtual tokens with no monetary value</li>
