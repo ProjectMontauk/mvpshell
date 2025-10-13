@@ -91,7 +91,7 @@ const Navbar = () => {
     : [
         inAppWallet({
           auth: {
-            options: ["google", "apple", "email", "phone"] as const,
+            options: ["google", "apple", "email", "phone", "passkey"] as const,
           },
           smartAccount: {
             chain: base,
