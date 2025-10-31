@@ -149,7 +149,7 @@ export default function DocsPage() {
             </ol>
             <p className="text-gray-800 leading-7 text-base mb-4">
               The manipulator is going to buy shares to increase the median price during the settlement period. Since it is an idealized environment,
-              there are no other traders in the market so the manipulator will have complete control over the median price. Let's graph the manipulator's profits 
+              there are no other traders in the market so the manipulator will have complete control over the median price. Let&apos;s graph the manipulator&apos;s profits 
               as they buy more shares from the nuetral market postions of q₁ & q₂ = 0.
             </p>
             
@@ -242,7 +242,7 @@ export default function DocsPage() {
               </div>
               <h5 className="text-xl font-bold text-black font-sans mb-3">Notes on Dynamic Vig</h5>
               <p className="text-gray-800 leading-7 text-base">
-            The dynamic vig is applied when the trader is redeeming their shares. It works like a discount that the market maker applies to the trader's shares upon redemption. 
+            The dynamic vig is applied when the trader is redeeming their shares. It works like a discount that the market maker applies to the trader&apos;s shares upon redemption. 
             To calculate the dynamic vig, the market maker needs to save the exact market state before and after each trade which cannot be saved on chain. 
             </p>
             </div>
@@ -279,7 +279,7 @@ export default function DocsPage() {
               Users can redeem their shares for the exact amount that they could have sold them on the open market. The advantage for waiting until redemption is that the vig is not applied and this provides a small incentive for traders not to sell prior to settlement. 
             </p>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              Let's walk through a small example of how a manipulator could not profit even with full control over the settlement price:
+              Let&apos;s walk through a small example of how a manipulator could not profit even with full control over the settlement price:
               
             </p>
             <p className="text-gray-800 leading-7 mb-4 text-base">
@@ -392,7 +392,7 @@ export default function DocsPage() {
               <BlockMath>{String.raw`\text{Cost Trader 1} = \$9{,}272`}</BlockMath>
             </div>
             <p className="text-gray-800 leading-7 mb-4 text-base">
-              The second trader buys another 14,000 shares this time with q1 being 14,000 shares due to their partner's purchase. The cost of the second trader's purchase is below: 
+              The second trader buys another 14,000 shares this time with q1 being 14,000 shares due to their partner&apos;s purchase. The cost of the second trader&apos;s purchase is below: 
             </p>
             <div className="my-4 text-base md:text-lg" style={{ textAlign: 'left', width: '100%' }}>
               <BlockMath>{String.raw`\text{Cost Trader 2} = \left(10000 \cdot \ln\left(e^{\frac{28000}{10000}} + e^{0}\right)\right) - \left(10000 \cdot \ln\left(e^{\frac{14000}{10000}}\right)\right)`}</BlockMath>
@@ -434,7 +434,7 @@ export default function DocsPage() {
             </p>
             <ol className="list-decimal pl-6 space-y-4 text-gray-800 leading-7 text-base mb-4">
               <li>
-                <strong>Max Purchase Limits:</strong> A single trader is only allowed to move the market 10%. The cumulative price impact of their trades will be tracked and no account's trades can produce a cumulative price impact greater than 10%. This can easily be enforced on the front-end and results in manipulators needing to coordinate with other real identities to carry out attacks. 
+                <strong>Max Purchase Limits:</strong> A single trader is only allowed to move the market 10%. The cumulative price impact of their trades will be tracked and no account&apos;s trades can produce a cumulative price impact greater than 10%. This can easily be enforced on the front-end and results in manipulators needing to coordinate with other real identities to carry out attacks. 
               </li>
               <li>
                 <strong>KYC (Know Your Customer):</strong> Identity verification that ties each trading account to a real-world identity. KYC makes sybil attacks expensive by requiring manipulators to recruit or procure actual identities rather than creating disposable accounts. This raises the cost of coordination since each participant must be a verified individual. 
