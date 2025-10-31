@@ -59,8 +59,8 @@ export default function DocsPage() {
 
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The primary problem with Knowledge markets is exploitation. In this paper, we will outline how 
-                manipulators can attack the market and how the installed protocols can mitigate these attacks.
+                The primary problem with Knowledge Markets is exploitation. This paper will outline how 
+                manipulators can attack the market and how the installed protocols can protect against these attacks.
               </p>
             </div>
           </section>        
@@ -200,7 +200,7 @@ export default function DocsPage() {
             </div>
 
             <p className="text-gray-800 leading-7 mb-4 text-base">
-              Assume the market is at the neutral market position that we described before:
+              Assume the market is at the neutral market position:
             </p>
             <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 text-base mb-6">
               <li>b = 10000 (market seed cost = $6,931)</li>
@@ -352,9 +352,9 @@ export default function DocsPage() {
               median redemption function deducts price slippage, while the normal redemption function redeems the user at the median price during settlement. 
             </p>
             <p className="text-gray-800 leading-7 text-base">
-              A possible problem with the altered median redemption function is how do we determine the median settlement state? 
+              A possible problem with the altered median redemption function is how is the median settlement state determined? 
               At expiration, the market will have a certain purchase state, but traders will redeem their shares based on the median settlement state which is not the same as the purchase state at expiration. 
-              So how do we know that the market maker will be able to meet payout obligations at redemption? This topic will be handled in the next paper called, median payout dynamics. 
+              So will the market maker be able to meet payout obligations at redemption? This topic will be handled in another paper. 
             </p>
           </section>
 
