@@ -51,3 +51,17 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* Ensure KaTeX block equations are left-aligned */
+.katex-display {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Additional override for KaTeX containers */
+.katex {
+  text-align: left !important;
+}
