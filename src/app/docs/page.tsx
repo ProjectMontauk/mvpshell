@@ -17,10 +17,10 @@ export default function DocsPage() {
           
           <div className="font-mono text-sm text-gray-900 space-y-1 leading-relaxed">
             <div className="pl-0"><strong>1. Introduction</strong></div>
-            <div className="pl-0"><strong>2. Single Manipulator Attack</strong></div>
+            <div className="pl-0"><strong>2. Single Manipulator</strong></div>
             <div className="pl-4">1. Dynamic Vig</div>
             <div className="pl-4">2. Altered Median Redemption</div>
-            <div className="pl-0"><strong>3. Multiple Manipulator Attack</strong></div>
+            <div className="pl-0"><strong>3. Multiple Manipulators</strong></div>
             <div className="pl-4">1. Max Purchase Limits</div>
             <div className="pl-4">2. KYC</div>
             <div className="pl-4">3. Median Settlement</div>
@@ -58,14 +58,14 @@ export default function DocsPage() {
 
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The primary problem with Idea futures markets is exploitation. This paper will outline how 
+                The primary problem with idea futures markets is exploitation. This paper will outline how 
                 manipulators can attack the market and how the installed protocols can protect against these attacks.
               </p>
             </div>
           </section>        
 
           <section className="mt-10">
-            <h2 className="text-2xl font-bold text-black font-sans mb-3">Single Manipulator Attack</h2>
+            <h2 className="text-2xl font-bold text-black font-sans mb-3">Single Manipulator</h2>
             <p className="text-gray-800 leading-7 mb-4">
               A single manipulator attack is conducted by one trader who attempts to distort the
               market price to their advantage. This attack can occur during both the discovery
@@ -175,7 +175,7 @@ export default function DocsPage() {
             </p>
             <ol className="list-decimal pl-6 space-y-3 text-gray-800 leading-7 text-base">
               <li>
-                <strong>Dynamic Vig:</strong> On any profitable manipulation trade, increase the vig so that the manipulator&apos;s payout is sufficiently discounted to prevent profits. At redemption, the vig needs to be calculated and applied separately for each trade.
+                <strong>Dynamic Vig:</strong> On any profitable manipulation trade, increase the vig so that the manipulator&apos;s payout is discounted to prevent profits. At redemption, the vig needs to be calculated and applied separately for each trade.
               </li>
               <li>
                 <strong>Altered Median in Redemption:</strong> The redemption price for each trader will the be the median price over the settlement period minus the shares purchased by each trader. This way traders do not make money from any movement in price due to their own purchasing behavior. Traders can only make money when other traders buy their position naturally pushing the median price up.
@@ -254,8 +254,8 @@ export default function DocsPage() {
           <section className="mt-10">
             <h2 className="text-xl font-bold text-black font-sans mb-3">Altered Median Redemption Function</h2>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              The Altered Median Redemption prevents manipulators from profiting from their own self-generated price movements by simulating the price slippage that occurs when a trader sells their shares on the open market.
-              The Altered Median Redemption function works like the normal sale function but the Cost Before term is the median settlement state:  
+              The altered median redemption function prevents manipulators from profiting from their own self-generated price movements by simulating the price slippage that occurs when a trader sells their shares on the open market.
+              The altered median redemption function works like the normal sale function but the cost before term is the median settlement state:  
             </p>
             <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
               <BlockMath>{String.raw`\text{Refund} = C_{\text{before}} - C_{\text{after}}`}</BlockMath>
@@ -296,7 +296,7 @@ export default function DocsPage() {
           </p>
 
           <p className="text-gray-800 leading-7 text-base mb-4">
-              However in an altered median redemption market, the manipulator will not be able to profit as shown in the calculation below: 
+              However in an altered median redemption market, the manipulator will not be able to profit as shown in the calculations below: 
           </p>
 
           <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
@@ -353,7 +353,7 @@ export default function DocsPage() {
             <p className="text-gray-800 leading-7 text-base">
               A possible problem with the altered median redemption function is how is the median settlement state determined? 
               At expiration, the market will have a certain purchase state, but traders will redeem their shares based on the median settlement state which is not the same as the purchase state at expiration. 
-              As a result, the market maker faces additional potential losses in redemption since the median market state may increase the total payouts to traders. This topic will be handled in another paper. 
+              As a result, the market maker faces additional potential losses in redemption since the median market state may require more payouts to traders than the purchase state at expiration. This topic will be handled in another paper. 
             </p>
           </section>
 
@@ -365,7 +365,7 @@ export default function DocsPage() {
           </section>
 
           <section className="mt-10">
-            <h2 className="text-2xl font-bold text-black font-sans mb-3">Multiple Manipulator Attack</h2>
+            <h2 className="text-2xl font-bold text-black font-sans mb-3">Multiple Manipulators</h2>
             <p className="text-gray-800 leading-7 text-base mb-4">
               A multiple manipulator attack occurs when two or more actors coordinate to move the market price in the same direction. Compared with a single trader attack, multiple manipulators can distribute purchases across identities to evade penalties from an altered median redemption market. 
               Since single trader manipulation trades result in zero profit in an altered median redemption market, multiple manipulators can profitably coordinate since the deduction applied due to the price movement is split between them. Below is an example of how multiple manipulators can profit: 
@@ -440,7 +440,7 @@ export default function DocsPage() {
               </li>
               <li>
                 <strong>Median Settlement:</strong> Settlement uses the median price over the last month of the market. 
-                This means manipulators need to effect the market odds more than 50% of the time during the settlement period to have any effect on the market. Attempts to manipulate the market odds early in the settlement period provide other traders plenty of time to trade against the manipulators, confusing their desired price movement. 
+                This means manipulators need to effect the market odds more than 50% of the time during the settlement period to have any effect on the market. Attempts to manipulate the market odds early in the settlement period provide other traders plenty of time to trade against the manipulators, confusing the desired price movement. 
               </li>
               <li>
                 <strong>Daily Price Change Caps:</strong> A absolute 15% limit on total price change per market day prevents rapid price changes associated with multiple manipulator attacks. This ensures that even well-funded coalitions cannot force prices to extreme levels quickly; instead, they must sustain pressure over multiple days, giving the market time to respond. The daily cap forces manipulators to spread attacks across time, increasing both coordination complexity and the opportunity for detection.
@@ -450,7 +450,7 @@ export default function DocsPage() {
               </li>
             </ol>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              Together, these five measures create layered friction that makes multiple manipulator attacks significantly more difficult. Coalitions must coordinate real identities, spread purchases across time and accounts, extend attacks over multiple days, and overcome settlement mechanics that average out spiky activity all while facing the threat of fund seizure.
+              Together, these five measures create friction that makes multiple manipulator attacks significantly more difficult. Coalitions must coordinate real identities, spread purchases across time and accounts, extend attacks over multiple days, and overcome settlement mechanics that average out spiky activity all while facing the threat of fund seizure.
             </p>
           </section>
         </div>
