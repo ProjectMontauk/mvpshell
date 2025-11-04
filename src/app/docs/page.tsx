@@ -11,7 +11,7 @@ export default function DocsPage() {
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-4 py-8">
           <div className="text-sm text-gray-400 font-sans mb-2">Research</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-black font-sans mb-4">Knowledge Markets</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-black font-sans mb-4">Ideas Futures</h1>
           
           <div className="font-bold text-black font-sans text-lg mb-4">OUTLINE</div>
           
@@ -31,10 +31,10 @@ export default function DocsPage() {
           <section className="mt-10">
             <h2 className="text-2xl font-bold text-black font-sans mb-3">Introduction</h2>
             <p className="text-gray-800 leading-7 mb-4">
-              Knowledge markets align incentives to surface, evaluate, and fund the discovery of
+              Idea Futures Markets align incentives to surface, evaluate, and fund the discovery of
               high-value information. By pricing hypotheses and rewarding updates toward truth,
               these markets coordinate attention and capital toward questions that matter. 
-              Knowledge markets have two periods during their lifecycle:
+              Idea Futures Markets have two periods during their lifecycle:
             </p>
             
             <div className="mb-6">
@@ -59,7 +59,7 @@ export default function DocsPage() {
 
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The primary problem with Knowledge Markets is exploitation. This paper will outline how 
+                The primary problem with Idea Futures Markets is exploitation. This paper will outline how 
                 manipulators can attack the market and how the installed protocols can protect against these attacks.
               </p>
             </div>
