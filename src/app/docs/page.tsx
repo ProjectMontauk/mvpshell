@@ -19,7 +19,7 @@ export default function DocsPage() {
             <div className="pl-0"><strong>1. Introduction</strong></div>
             <div className="pl-0"><strong>2. Single Manipulator Attack</strong></div>
             <div className="pl-4">1. Dynamic Vig</div>
-            <div className="pl-4">2. Altered Median</div>
+            <div className="pl-4">2. Altered Median Redemption</div>
             <div className="pl-0"><strong>3. Multiple Manipulator Attack</strong></div>
             <div className="pl-4">1. Max Purchase Limits</div>
             <div className="pl-4">2. KYC</div>
@@ -31,15 +31,14 @@ export default function DocsPage() {
           <section className="mt-10">
             <h2 className="text-2xl font-bold text-black font-sans mb-3">Introduction</h2>
             <p className="text-gray-800 leading-7 mb-4">
-              Idea Futures Markets align incentives to surface, evaluate, and fund the discovery of
-              high-value information. By pricing hypotheses and rewarding updates toward truth,
+              Idea futures align incentives to surface, evaluate, and fund research on questions that have remained unresolved for decades. By pricing hypotheses and rewarding updates toward truth,
               these markets coordinate attention and capital toward questions that matter. 
-              Idea Futures Markets have two periods during their lifecycle:
+              Idea futures markets have two periods during their lifecycle:
             </p>
             
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The Discovery Period is the first phase of a knowledge market that runs for a select period of time.
+                The discovery period is the first phase of an idea futures market that runs for a select period of time.
                 To start, the discovery period will be 5 months and during this period traders are able to buy/sell shares
                 and share information in the evidence section. During the discovery period, the market collects
                 all relevant information about each claim and then prices the probability that each claim is true given the information shared. 
@@ -48,8 +47,8 @@ export default function DocsPage() {
 
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The Settlement Period begins immediately after the Discovery Period and runs for 
-                one month. Like the Discovery Period, the market remains fully open to buying, 
+                The settlement period begins immediately after the discovery period and runs for 
+                one month. Like the discovery period, the market remains fully open to buying, 
                 selling, and sharing information. The only difference is that during the settlement
                 period, the median price is recorded and used to determine the final settlement price of the market.
                 After the settlement period ends, the market is resolved and the payouts are distributed to the 
@@ -59,7 +58,7 @@ export default function DocsPage() {
 
             <div className="mb-6">
               <p className="text-gray-800 leading-7 mb-3">
-                The primary problem with Idea Futures Markets is exploitation. This paper will outline how 
+                The primary problem with Idea futures markets is exploitation. This paper will outline how 
                 manipulators can attack the market and how the installed protocols can protect against these attacks.
               </p>
             </div>
@@ -68,9 +67,9 @@ export default function DocsPage() {
           <section className="mt-10">
             <h2 className="text-2xl font-bold text-black font-sans mb-3">Single Manipulator Attack</h2>
             <p className="text-gray-800 leading-7 mb-4">
-              A Single Manipulator Attack is conducted by one trader who attempts to distort the
-              market price to their advantage. This attack can occur during both the Discovery
-              and Settlement period. However, it is unprofitable for the manipulator to sell their position
+              A single manipulator attack is conducted by one trader who attempts to distort the
+              market price to their advantage. This attack can occur during both the discovery
+              and settlement period. However, it is unprofitable for the manipulator to sell their position
               prior to settlement since they would experience normal price slippage. 
             </p>
             <p className="text-gray-800 leading-7 mb-4">
@@ -276,10 +275,10 @@ export default function DocsPage() {
               <li>X₁ = yes shares purchased</li>
             </ul>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              Users can redeem their shares for the exact amount that they could have sold them on the open market. The advantage for waiting until redemption is that the vig is not applied and this provides a small incentive for traders not to sell prior to settlement. 
+              Traders can redeem their shares for the exact amount that they could have sold them on the open market. The advantage for waiting until redemption is that the vig is not applied and this provides a small incentive for traders not to sell prior to settlement. 
             </p>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              Let&apos;s walk through a small example of how a manipulator could not profit even with full control over the settlement price:
+              Let&apos;s walk through a small example of how a manipulator cannot profit even with full control over the settlement price:
               
             </p>
             <p className="text-gray-800 leading-7 mb-4 text-base">
@@ -354,22 +353,22 @@ export default function DocsPage() {
             <p className="text-gray-800 leading-7 text-base">
               A possible problem with the altered median redemption function is how is the median settlement state determined? 
               At expiration, the market will have a certain purchase state, but traders will redeem their shares based on the median settlement state which is not the same as the purchase state at expiration. 
-              So will the market maker be able to meet payout obligations at redemption? This topic will be handled in another paper. 
+              As a result, the market maker faces additional potential losses in redemption since the median market state may increase the total payouts to traders. This topic will be handled in another paper. 
             </p>
           </section>
 
           <section className="mt-10">
           <h3 className="text-xl font-bold text-black font-sans mb-3">Conclusion on Preventing Single Trader Manipulation</h3>
           <p className="text-gray-800 leading-7 text-base">
-              Altered median redemption is the best way to settle the market to prevent manipulators from profiting from their own price movements because it is easier to implement than the dynamic vig and easier to understand for traders since it is the same function as the normal sale function used in the open market.  
+              Altered median redemption is the best way to settle the market to prevent manipulators from profiting from their own price movements because it is easier to implement than the dynamic vig and easier to understand since it is the same function as the normal sale function used during the open market period.  
           </p>
           </section>
 
           <section className="mt-10">
             <h2 className="text-2xl font-bold text-black font-sans mb-3">Multiple Manipulator Attack</h2>
             <p className="text-gray-800 leading-7 text-base mb-4">
-              A Multiple Manipulator Attack occurs when two or more actors coordinate to move the market price in the same direction. Compared with a single trader attack, multiple manipulators can distribute purchases across identities to evade penalties from an altered median redemption market. 
-              Since single trader manipulation trades result in zero profit in an altered median redemption market, multiple manipulators can coordinate to profit since the deduction applied due to the price movement is split between them. Below is an example of how multiple manipulators can profit: 
+              A multiple manipulator attack occurs when two or more actors coordinate to move the market price in the same direction. Compared with a single trader attack, multiple manipulators can distribute purchases across identities to evade penalties from an altered median redemption market. 
+              Since single trader manipulation trades result in zero profit in an altered median redemption market, multiple manipulators can profitably coordinate since the deduction applied due to the price movement is split between them. Below is an example of how multiple manipulators can profit: 
             </p>
 
             <p className="text-gray-800 leading-7 mb-4 text-base">
@@ -426,7 +425,7 @@ export default function DocsPage() {
               <BlockMath>{String.raw`\text{Profit Trader 1 \& 2} = \$910`}</BlockMath>
             </div>
             <p className="text-gray-800 leading-7 mb-4 text-base">
-              As demonstrated above, multiple manipulators can coordinate to profits in an altered median redemption market by splitting the deduction applied due to the price movement.   
+              As demonstrated above, multiple manipulators can profitably coordinate in an altered median redemption market by splitting the deduction applied due to the price movement.   
             </p>
             <h3 className="text-xl font-bold text-black font-sans mb-3 mt-6">Preventing Multiple Manipulator Attacks</h3>
             <p className="text-gray-800 leading-7 text-base mb-4">
