@@ -178,7 +178,7 @@ export default function DocsPage() {
                 <strong>Dynamic Vig:</strong> On any profitable manipulation trade, increase the vig so that the manipulator&apos;s payout is discounted to prevent profits. At redemption, the vig needs to be calculated and applied separately for each trade.
               </li>
               <li>
-                <strong>Altered Median in Redemption:</strong> The redemption price for each trader will the be the median price over the settlement period minus the shares purchased by each trader. This way traders do not make money from any movement in price due to their own purchasing behavior. Traders can only make money when other traders buy their position naturally pushing the median price up.
+                <strong>Altered Median in Redemption:</strong> The redemption price for each trader will be the median price over the settlement period minus the shares purchased by each trader. This way traders do not make money from any movement in price due to their own purchasing behavior. Traders can only make money when other traders buy their position naturally pushing the median price up.
               </li>
             </ol>
           </section>
