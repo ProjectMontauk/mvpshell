@@ -149,7 +149,7 @@ export default function DocsPage() {
             <p className="text-gray-800 leading-7 text-base mb-4">
               The manipulator is going to buy shares to increase the median price during the settlement period. Since it is an idealized environment,
               there are no other traders in the market so the manipulator will have complete control over the median price. Let&apos;s graph the manipulator&apos;s profits 
-              as they buy more shares from the nuetral market postions of q₁ & q₂ = 0.
+              as they buy more shares from the neutral market postions of q₁ & q₂ = 0.
             </p>
             
 
