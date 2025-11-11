@@ -453,6 +453,137 @@ export default function DocsPage() {
               Together, these five measures create friction that makes multiple manipulator attacks significantly more difficult. Coalitions must coordinate real identities, spread purchases across time and accounts, extend attacks over multiple days, and overcome settlement mechanics that average out spiky activity all while facing the threat of fund seizure.
             </p>
           </section>
+
+          <section className="mt-10">
+            <h2 className="text-2xl font-bold text-black font-sans mb-3">Median Payout Dynamics</h2>
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The market maker is exposed to additional losses when using the median settlement price since the median settlement price may be higher than the final market odds at expiration. If the median settlement price is greater than the final market odds at expiration, then the total payouts to traders is higher since the dominant side of the market is redeemed at a higher price per share. Below is an example of how median settlement markets can lead to additional losses for the market maker. 
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Let&apos;s assume the following market parameters at closure:
+            </p>
+            <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 text-base mb-4">
+              <li>b = 10000 (market seed cost = $6,931)</li>
+              <li>q₁ = 17346</li>
+              <li>q₂ = 0</li>
+            </ol>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              At the purchasing state described above, the market odds for the yes position are 85% and 15% for the no position. 
+              If we use the final purchasing state for payouts, the market maker incurs the following losses:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = ((\text{Yes} \cdot \text{Set(Yes)}) + (\text{No} \cdot \text{Set(No)})) - ((10000 \cdot \ln(e^{\frac{yes}{10000}} + e^{\frac{no}{10000}})) - (10000 (\ln(2)))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = ((17346 \cdot 0.85) + (0 \cdot 0.15)) - ((10000 \cdot \ln(e^{\frac{17346}{10000}} + e^{0})) - (10000 \cdot \ln(2)))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = 2704.38092754`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              For the sake of creating a median settlement price higher than the final market odds, let&apos;s say there is a large yes share owner that sells a large position prior to market close. They held their position for the majority of the settlement period and effectively pushed the median price to 95 cents and then sold prior to settlement, causing the final market odds to drop to 85 cents. Due to the higher median settlement price, the market maker is exposed to additional losses as shown below, even though the purchasing state is the exact same at market close:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = ((17346 \cdot 0.95) + (0 \cdot 0.05)) - ((10000 \cdot \ln(e^{\frac{17346}{10000}} + e^{0})) - (10000 \cdot \ln(2)))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = 4438.98092754`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              As demonstrated above, the market maker can be exposed to additional losses as a result of using a median settlement market. Conversely, market maker losses can be mitigated as a result of using a median market when the median settlement price is below the final market odds on the dominant side of the market:
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Let&apos;s say there is a last minute yes shares buyer who pushed the market odds to 85 cents right before the market close but the median price over the settlement period was 75 cents. The market maker would incur the following losses:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = ((17346 \cdot 0.75) + (0 \cdot 0.25)) - ((10000 \cdot \ln(e^{\frac{17346}{10000}} + e^{0})) - (10000 \cdot \ln(2)))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = 969.780927539`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              In a median settlement price market, the potential losses faced by the market maker are not bounded by b · ln(2). The maximum loss function for the market maker is unbounded and becomes the total market payout function shown below:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Market Maker Loss} = ((\text{Yes} \cdot \text{Set(Yes)}) + (\text{No} \cdot \text{Set(No)})) - ((b \cdot \ln(e^{\frac{yes}{b}} + e^{\frac{no}{b}})) - (b \cdot \ln(2)))`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              In sum, median settlement markets expose market makers to additional losses. However, the market maker losses can be the same or less than the market maker losses in a final market odds market when the median settlement price is at or below the final market odds.
+            </p>
+            
+            <h3 className="text-xl font-bold text-black font-sans mb-3 mt-8">Threat of Settlement</h3>
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              A mitigation against multiple manipulators is to threaten that the market can be fully settled given either claim can be proven beyond a reasonable doubt. This increases the chance that their manipulation attack investment goes to zero. Consider the following market: 
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Let&apos;s assume the following market parameters at closure:
+            </p>
+            <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 text-base mb-4">
+              <li>b = 10000 (market seed cost = $6,931)</li>
+              <li>q₁ = 0</li>
+              <li>q₂ = 29444</li>
+              <li>vig = 3%</li>
+              <li>Yes market odds = 5%</li>
+              <li>No market odds = 95%</li>
+              <li>Each trader is only allowed to move the odds by 10%, due to max purchase limits</li>
+            </ol>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The manipulators want to move the market price for the yes odds from 5% to 95%, and a cabal of 9 manipulators plan on coming together to accomplish this. Each manipulator will buy the max number of shares to move the market 10% and collectively move the yes odds from 5% to 95%. The manipulators collective profit function in an altered redemption function market is the following, given they have total control of the redemption price:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Manip Exp Profits} = (\text{Total Shares Purchased} \cdot \text{Altered Median Redemption}) - (\text{Cost of Shares})`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Manip Exp Profits} = (58888 \cdot 0.9080) - ((10000 \cdot \ln(e^{\frac{58888}{10000}} + e^{\frac{29444}{10000}})) - (10000 \cdot \ln(e^{\frac{0}{10000}} + e^{\frac{29444}{10000}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Manip Exp Profits} = 24026.3`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              After spending $29,444, the manipulators would expect to profit $24,026.3 and $2,669 on a per manipulator basis. Now let&apos;s see what the perceived threat of settlement would need to be to prevent them from executing the manipulation trades:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Manip Exp Profits} = (\text{Manip Profits} \cdot P(\text{No Settlement})) + (\text{Manip Costs} \cdot P(\text{Settlement}))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`0 = (24026 \cdot (1 - P)) + (-29444 \cdot P)`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`P = 0.449336076304`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              If the manipulators believed there was more than a 44.9% chance that the market would be settled, then they would not execute the manipulation trades since their expected profits would be negative.
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Teams of manipulators can lose money because either the market was resolved in the opposite direction or their manipulation trades were liquidated and the wagered money was seized by the market maker. The effective threat of either of those events happening needs to be around 50% in order to effectively dissuade teams of manipulators.
+            </p>
+          </section>
         </div>
       </main>
     </div>
