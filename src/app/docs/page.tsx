@@ -95,9 +95,9 @@ export default function DocsPage() {
               </p>
               <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 mb-4">
                 <li>No - beyond a reasonable doubt (estimated confidence of 95%)</li>
-                <li>No - clear preponderance of evidence (estimated confidence of 60%)</li>
-                <li>No - inconclusive for both sides (estimated confidence of less than 60%)</li>
-                <li>Yes - clear preponderance of evidence (estimated confidence of 60%)</li>
+                <li>No - clear preponderance of evidence (estimated confidence of 70%)</li>
+                <li>No - inconclusive for both sides (estimated confidence of less than 70%)</li>
+                <li>Yes - clear preponderance of evidence (estimated confidence of 70%)</li>
                 <li>Yes - beyond a reasonable doubt (estimated confidence of 95%)</li>
               </ol>
               <p className="text-gray-800 leading-7 mb-4">
