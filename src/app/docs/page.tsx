@@ -3,15 +3,115 @@
 import Navbar from '../../../components/Navbar';
 import { BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
+import { useState } from 'react';
 
 export default function DocsPage() {
+  const [activeTab, setActiveTab] = useState<'economics' | 'idea-futures'>('economics');
+
   return (
     <div>
       <Navbar />
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-4 py-8">
           <div className="text-sm text-gray-400 font-sans mb-2">Research</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-black font-sans mb-4">Ideas Futures</h1>
+          
+          <div className="flex gap-4 mb-6 border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('economics')}
+              className={`pb-2 px-1 font-sans text-lg font-semibold transition-colors ${
+                activeTab === 'economics'
+                  ? 'text-black border-b-2 border-black'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              Economics
+            </button>
+            <button
+              onClick={() => setActiveTab('idea-futures')}
+              className={`pb-2 px-1 font-sans text-lg font-semibold transition-colors ${
+                activeTab === 'idea-futures'
+                  ? 'text-black border-b-2 border-black'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              Idea Futures
+            </button>
+          </div>
+
+          {activeTab === 'economics' && (
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold text-black font-sans mb-4">Economics</h1>
+              <p className="text-gray-800 leading-7 mb-4">
+                Data is not valuable, the truth is. The Citizen is a fact finding and verification platform that crowdsources claims and uses prediction markets to confirm their authenticity. The mission is to tell the unmitigated truth about anything.
+              </p>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Market Resolution</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                The markets will be resolved by a panel of three neutral judges that have domain expertise. The Citizen that will draft three judges that meet the following criteria:
+              </p>
+              <ul className="list-disc pl-6 space-y-2 text-gray-800 leading-7 mb-4">
+                <li>Male born in the United States</li>
+                <li>Phd. or Phd. candidate in relevant field</li>
+                <li>Self-proclaimed neutral and undecided on the particular question at hand</li>
+              </ul>
+              <p className="text-gray-800 leading-7 mb-4">
+                To preserve the integrity of the panel, the identity of the judges will never be revealed. This will ensure that the panel is free to make any judgement without fear of backlash. Extraordinary measures will be taken to never reveal the identity of the judges. Judging anonymity may increase the honesty of the traders since they will not be able to guess the biases of the judges based on public information. 
+              </p>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Judging Incentives</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                The Judges will be paid using two different methods.
+              </p>
+              <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 mb-4">
+                <li>Each judge will receive a 1% vig on all bets wagered on the market.</li>
+                <li>Each judge will collect a $1 royalty on the case summary that will be published at the end of the market. The caveat is that the the royalty payments will stop if their decision is overturned in a later appeals market.</li>
+              </ol>
+              <p className="text-gray-800 leading-7 mb-4">
+                The vig is collected on all trades. If a market does 100,000 dollars in volume, each judge will earn $1,000 from the vig.
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                If the case summary sells 1,000 copies at $6 dollar per, each judge will earn $1,000. However if their decision is overturned in an appeals market, then the overturning panel will publish a new paper and the old judges from the overturned decision will not receive any proceeds from the new paper.
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                Judges are incentivized to make a truthful decision that can withstand scrutiny to preserve their future royalty payments. If the decision succeeds in telling the truth and avoiding appeals courts, the judges can collect royalty payments for eternity. If a paper sells 200,000 copies over its life-time, each judge will earn $200,000. 
+              </p>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Appeals Markets</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                Each month, the market decision with the highest number of weighted trader votes will be started fresh with the evidence section cleared and the market odds set back to 50-50. After the market expires, a new paper will be published by the new set of judges and replace the old case summary. 
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                If the previous decision is upheld, the previous judges and the new judges will split the royalties at $1 per sale and The Citizen will stop receiving royalty payments. If the new judges overturn the previous decision, the previous judges will stop receiving the royalties and the royalties will be split between The Citizen and the new judges.
+              </p>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Citizen Economics</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                The Citizen will lose money on market making. For the initial markets, The Citizen will lose $6,931 on providing initial liquidity and the vig collected from the market will be split amongst the judges. However, The Citizen will take 50% of the royalties from the case summaries. At $6 per case summary, this means that the Citizen needs to sell 2,310 case summaries to break even on the market making. Any case studies sold after the 2,310th will result in the venture being profitable. The Citizen eventually expects to pivot to a subscription model where subscribers will pay $10 per month, but the initial payment model will be based on individual case summaries.
+              </p>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Judging Criteria</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                Each judge will categorize their final opinion in one of the following buckets:
+              </p>
+              <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 mb-4">
+                <li>No - beyond a reasonable doubt</li>
+                <li>No - clear preponderance of evidence</li>
+                <li>Totally Inconclusive</li>
+                <li>Yes - clear preponderance of evidence</li>
+                <li>Yes - beyond a reasonable doubt</li>
+              </ol>
+              <p className="text-gray-800 leading-7 mb-4">
+                Only when the judges unanimously conclude, &quot;Yes - beyond a reasonable doubt&quot; will the market resolve Yes. The Citizen is also considering using an override system where if two judges agree on a category and the third disagrees, that the agreeing two judges can override the third judge&apos;s opinion to reach a final opinion.
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                In an appeals market, only when a market resolution is charged from overturned fromYes to No or No to Yes, will the previous judges lose their royalty payments. 
+              </p>
+            </div>
+          )}
+
+          {activeTab === 'idea-futures' && (
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-black font-sans mb-4">Ideas Futures</h1>
           
           <div className="font-bold text-black font-sans text-lg mb-4">OUTLINE</div>
           
@@ -581,9 +681,184 @@ export default function DocsPage() {
             </p>
             
             <p className="text-gray-800 leading-7 text-base mb-4">
-              Teams of manipulators can lose money because either the market was resolved in the opposite direction or their manipulation trades were liquidated and the wagered money was seized by the market maker. The effective threat of either of those events happening needs to be around 50% in order to effectively dissuade teams of manipulators.
+              Teams of manipulators can lose money because either the market was resolved in the opposite direction or their manipulation trades were liquidated and the wagered money was seized by the market maker. The effective threat of either of those events happening needs to be around 50% in order to effectively dissuade teams of manipulators at all market positions.
+            </p>
+            
+            <h3 className="text-xl font-bold text-black font-sans mb-3 mt-8">Market Maker Profit & Loss Function</h3>
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The market maker profits or losses will be determined by whether the payouts to traders are greater than the total cost that traders paid to purchase their shares. Payouts to traders are reduced during the open market with the 3% standard market vig. Payouts to traders are reduced in redemption since the altered redemption formula deducts price slippage from payouts. The market maker fee functions are shown below:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = \text{Open Market Sales} \cdot 0.03`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees For Yes Share Purchases} = \sum_{i=1}^{n} (x_i \cdot p(x)) - ((b \cdot \ln(e^{\frac{q_1}{b}} + e^{\frac{q_2}{b}})) - (10000 \cdot \ln(e^{\frac{q_1-x_i}{b}} + e^{\frac{q_2}{b}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees For No Share Purchases} = \sum_{i=1}^{n} (y_i \cdot p(y)) - ((b \cdot \ln(e^{\frac{q_1}{b}} + e^{\frac{q_2}{b}})) - (10000 \cdot \ln(e^{\frac{q_1}{b}} + e^{\frac{q_2-y_i}{b}})))`}</BlockMath>
+            </div>
+            
+            <ul className="list-disc pl-6 space-y-2 text-gray-800 leading-7 text-base mb-4">
+              <li>q₁ = amount of yes shares purchased</li>
+              <li>q₂ = amount of no shares purchased</li>
+              <li>xᵢ = shares purchased by an individual trader</li>
+              <li>yᵢ = shares purchased by an individual trader</li>
+              <li>p(x) = price of yes shares</li>
+              <li>p(y) = price of no shares</li>
+            </ul>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              To demonstrate how the fee functions work, let&apos;s assume the following market parameters:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-800 leading-7 text-base mb-4">
+              <li>B = 10000</li>
+              <li>Q₁ = 10000</li>
+              <li>Q₂ = 0</li>
+              <li>Vig = 3%</li>
+              <li>X₁ = 5000</li>
+            </ul>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Trader One(X₁) bought 5000 out of the 10000 yes shares in the market. If the trader decided to sell them in the open market, the market maker would apply the vig to the sale price and yield the following fees:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = \text{Redemption Price} \cdot \text{Vig}`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = ((10000 \cdot \ln(e^{\frac{10000}{10000}} + e^{\frac{0}{10000}})) - (10000 \cdot \ln(e^{\frac{5000}{10000}} + e^{\frac{0}{10000}}))) \cdot 0.03`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = (3391.84703338 \cdot 0.03)`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = \$101.75`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The market maker will gain $101.75 dollars after the trader sells their shares on the open market due to the vig. Please note that while the market maker made money on this transaction, they still face potential losses down the line due to uneven market action in redemption.
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              If the trader waits until the market is settled to redeem their shares, below is the calculation for market making fees given that there is no further purchasing activity:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = (X \cdot p(x)) - (((b \cdot \ln(e^{\frac{q_1}{b}} + e^{\frac{q_2}{b}}))) - (b \cdot \ln(e^{\frac{q_1-x}{b}} + e^{\frac{q_2}{b}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = (5000 \cdot 0.73105857863) - (((10000 \cdot \ln(e^{\frac{10000}{10000}} + e^{\frac{0}{10000}}))) - (10000 \cdot \ln(e^{\frac{5000}{10000}} + e^{\frac{0}{10000}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = 3655.29289315 - 3391.84703338`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = \$263.45`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The market maker will yield $263.45 in fees given that the trader waits until settlement to redeem their shares. The market maker losses are bounded by b · ln(2) and since the liquidity parameter is 10000, the maximum market maker loss is $6,931. The total Market Maker Profit or Loss is the loss at the final payout state less the fees collected over the course of the market.
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Let&apos;s simulate a market where the market maker profits:
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-gray-800 leading-7 text-base mb-4">
+              <li>Q₁ = 40000</li>
+              <li>Q₂ = 20000</li>
+              <li>Vig = 3%</li>
+              <li>$20,000 in proceeds from sales on the open market</li>
+              <li>Trader 1 (X₁) holds 20,000 yes shares into the settlement period</li>
+              <li>Trader 2 (Y₁) holds 10,000 no shares into the settlement period</li>
+            </ul>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Now let&apos;s calculate the market maker fees given the information above.
+            </p>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              First, the vig proceeds from the $20,000 in open market sales are as follows:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = 20000 \cdot 0.03`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Open Market Maker Fees} = \$600`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Now, let&apos;s calculate the market maker fees generated from the Trader 1 (X₁) holding 20,000 yes shares into redemption:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = (20000 \cdot 0.880797077978) - ((10000 \cdot \ln(e^{\frac{40000}{10000}} + e^{\frac{20000}{10000}})) - (10000 \cdot \ln(e^{\frac{20000}{10000}} + e^{\frac{20000}{10000}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } X_1 = \$3{,}278`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Now let&apos;s calculate the market maker fees generated from Trader 2 (Y₁) holding 10,000 no shares into redemption:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } Y_1 = (10000 \cdot 0.119202922022) - ((10000 \cdot \ln(e^{\frac{40000}{10000}} + e^{\frac{20000}{10000}})) - (10000 \cdot \ln(e^{\frac{40000}{10000}} + e^{\frac{10000}{10000}})))`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Market Maker Fees on } Y_1 = \$408.62`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Now let&apos;s calculate the losses that the market faces when paying out all the traders before fees are applied:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Loss} = \text{Redemption Payouts} - \text{Market Balance}`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Loss} = ((40000 \cdot 0.880797077978) + (20000 \cdot 0.119202922022)) - (34337.8083048)`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{Redemption Loss} = \$3{,}278`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              Finally let&apos;s calculate the Market Maker Profit & Loss Function given the fees collected on trader 1, trader 2, and the open market sales:
+            </p>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{P\&L} = (\text{Open Market Fees} + \text{Fees on } X_1 + \text{Fees on } Y_1) - (\text{Redemption Loss})`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{P\&L} = (600 + 3{,}278 + 408.62) - (3278)`}</BlockMath>
+            </div>
+            
+            <div className="my-4" style={{ textAlign: 'left', width: '100%' }}>
+              <BlockMath>{String.raw`\text{P\&L} = \$1{,}008.62`}</BlockMath>
+            </div>
+            
+            <p className="text-gray-800 leading-7 text-base mb-4">
+              The market maker makes $1,008.62 given the market parameters described above. Market making profitably depends entirely on market values but anytime the collected market fees are greater than the redemption loss, the market maker will profit. The smaller the average size of the share holder, the closer the market maker loss will be to the maximum bounded loss in redemption. The market maker profits in redemption from whales since it means that a large percentage of shares are redeemed below market odds.  
             </p>
           </section>
+            </div>
+          )}
         </div>
       </main>
     </div>
