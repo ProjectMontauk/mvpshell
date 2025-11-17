@@ -78,7 +78,7 @@ export default function DocsPage() {
               
               <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Appeals Markets</h2>
               <p className="text-gray-800 leading-7 mb-4">
-                Each month, the market decision with the highest number of weighted trader votes will be started fresh with the evidence section cleared and the market odds set back to 50-50. After the market expires, a new paper will be published by the new set of judges and replace the old case summary. 
+                Each month, the market decision with the highest number of weighted trader votes will be restarted with the evidence section cleared and the market odds set back to 50-50. After the market expires, a new paper will be published by the new set of judges and replace the old case summary. 
               </p>
               <p className="text-gray-800 leading-7 mb-4">
                 If the previous decision is upheld, the previous judges and the new judges will split the royalties at $1 per sale and The Citizen will stop receiving royalty payments. If the new judges overturn the previous decision, the previous judges will stop receiving the royalties and the royalties will be split between The Citizen and the new judges.
@@ -94,17 +94,17 @@ export default function DocsPage() {
                 Each judge will categorize their final opinion in one of the following buckets:
               </p>
               <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 mb-4">
-                <li>No - beyond a reasonable doubt</li>
-                <li>No - clear preponderance of evidence</li>
-                <li>Totally Inconclusive</li>
-                <li>Yes - clear preponderance of evidence</li>
-                <li>Yes - beyond a reasonable doubt</li>
+                <li>No - beyond a reasonable doubt (estimated confidence of 95%)</li>
+                <li>No - clear preponderance of evidence (estimated confidence of 60%)</li>
+                <li>No - inconclusive for both sides (estimated confidence of less than 60%)</li>
+                <li>Yes - clear preponderance of evidence (estimated confidence of 60%)</li>
+                <li>Yes - beyond a reasonable doubt (estimated confidence of 95%)</li>
               </ol>
               <p className="text-gray-800 leading-7 mb-4">
                 Only when the judges unanimously conclude, &quot;Yes - beyond a reasonable doubt&quot; will the market resolve Yes. The Citizen is also considering using an override system where if two judges agree on a category and the third disagrees, that the agreeing two judges can override the third judge&apos;s opinion to reach a final opinion.
               </p>
               <p className="text-gray-800 leading-7 mb-4">
-                In an appeals market, only when a market resolution is charged from overturned fromYes to No or No to Yes, will the previous judges lose their royalty payments. 
+                In an appeals market, only when a market resolution is overturned from Yes to No or No to Yes, will the previous judges lose their royalty payments. 
               </p>
             </div>
           )}
