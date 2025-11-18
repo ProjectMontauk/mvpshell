@@ -67,7 +67,7 @@ export default function DocsPage() {
                 <li>Each judge will collect a $1 royalty on the case summary that will be published at the end of the market. The caveat is that the the royalty payments will stop if their decision is overturned in a later appeals market.</li>
               </ol>
               <p className="text-gray-800 leading-7 mb-4">
-                The vig is collected on all trades. If a market does #100,000 in volume, each judge will earn $1,000 from the vig.
+                The vig is collected on all trades. If a market does $100,000 in volume, each judge will earn $1,000 from the vig.
               </p>
               <p className="text-gray-800 leading-7 mb-4">
                 If the case summary sells 1,000 copies at $6 dollar per, each judge will earn $1,000. However if their decision is overturned in an appeals market, then the overturning panel will publish a new paper and the old judges from the overturned decision will not receive any proceeds from the new paper.
