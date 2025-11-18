@@ -42,7 +42,7 @@ export default function DocsPage() {
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-black font-sans mb-4">Economics</h1>
               <p className="text-gray-800 leading-7 mb-4">
-                Data is not valuable, the truth is. The Citizen is a fact finding and verification platform that crowdsources claims and uses prediction markets to confirm their authenticity. The mission is to tell the unmitigated truth about anything.
+                Data is not valuable, the truth is. The Citizen is a fact finding and verification platform that crowdsources claims and uses prediction markets to confirm their authenticity. Over the long-term, the Citizen will tell the truth about anything.
               </p>
               
               <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Market Resolution</h2>
@@ -55,7 +55,7 @@ export default function DocsPage() {
                 <li>Self-proclaimed neutral and undecided on the particular question at hand</li>
               </ul>
               <p className="text-gray-800 leading-7 mb-4">
-                To preserve the integrity of the panel, the identity of the judges will never be revealed. This will ensure that the panel is free to make any judgement without fear of backlash. Extraordinary measures will be taken to never reveal the identity of the judges. Judging anonymity may increase the honesty of the traders since they will not be able to guess the biases of the judges based on public information. 
+                To preserve the integrity of the panel, the identity of the judges will never be revealed. This will ensure that the panel is free to make any judgement without fear of backlash. Extraordinary measures will be taken to never reveal the identity of the judges. Judging anonymity may increase the honesty of the traders since they will not be able to guess the biases of the judges based on public information, instead they can only rely on the evidence presented. 
               </p>
               
               <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Judging Incentives</h2>
@@ -67,7 +67,7 @@ export default function DocsPage() {
                 <li>Each judge will collect a $1 royalty on the case summary that will be published at the end of the market. The caveat is that the the royalty payments will stop if their decision is overturned in a later appeals market.</li>
               </ol>
               <p className="text-gray-800 leading-7 mb-4">
-                The vig is collected on all trades. If a market does 100,000 dollars in volume, each judge will earn $1,000 from the vig.
+                The vig is collected on all trades. If a market does #100,000 in volume, each judge will earn $1,000 from the vig.
               </p>
               <p className="text-gray-800 leading-7 mb-4">
                 If the case summary sells 1,000 copies at $6 dollar per, each judge will earn $1,000. However if their decision is overturned in an appeals market, then the overturning panel will publish a new paper and the old judges from the overturned decision will not receive any proceeds from the new paper.
@@ -105,6 +105,9 @@ export default function DocsPage() {
               </p>
               <p className="text-gray-800 leading-7 mb-4">
                 In an appeals market, only when a market resolution is overturned from Yes to No or No to Yes, will the previous judges lose their royalty payments. 
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                The Case Summary will review at least the top 10 pieces of evidence promoted in the evidence section for both positions and comment on the authenticity and truthfulness of each document.
               </p>
             </div>
           )}
