@@ -42,7 +42,7 @@ export default function DocsPage() {
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-black font-sans mb-4">Economics</h1>
               <p className="text-gray-800 leading-7 mb-4">
-                Data is not valuable, the truth is. The Citizen is a fact finding and verification platform that crowdsources claims and uses prediction markets to confirm their authenticity. Over the long-term, the Citizen will tell the truth about anything.
+                Data is not valuable, the truth is. The Citizen is a fact finding and verification platform that crowdsources claims and uses prediction markets to confirm their authenticity.
               </p>
               
               <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Market Resolution</h2>
@@ -353,7 +353,7 @@ export default function DocsPage() {
           {/* Removed Altered Median Price section */}
 
           {/* Removed Altered Median Settlement section */}
-
+          
           <section className="mt-10">
             <h2 className="text-xl font-bold text-black font-sans mb-3">Altered Median Redemption Function</h2>
             <p className="text-gray-800 leading-7 text-base mb-4">
