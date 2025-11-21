@@ -6,7 +6,7 @@ import 'katex/dist/katex.min.css';
 import { useState } from 'react';
 
 export default function DocsPage() {
-  const [activeTab, setActiveTab] = useState<'economics' | 'idea-futures'>('economics');
+  const [activeTab, setActiveTab] = useState<'economics' | 'idea-futures' | 'review-boards'>('economics');
 
   return (
     <div>
@@ -35,6 +35,16 @@ export default function DocsPage() {
               }`}
             >
               Idea Futures
+            </button>
+            <button
+              onClick={() => setActiveTab('review-boards')}
+              className={`pb-2 px-1 font-sans text-lg font-semibold transition-colors ${
+                activeTab === 'review-boards'
+                  ? 'text-black border-b-2 border-black'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              Review Boards
             </button>
           </div>
 
@@ -114,7 +124,7 @@ export default function DocsPage() {
 
           {activeTab === 'idea-futures' && (
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-black font-sans mb-4">Ideas Futures</h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-black font-sans mb-4">Ideas Futures</h1>
           
           <div className="font-bold text-black font-sans text-lg mb-4">OUTLINE</div>
           
@@ -860,6 +870,84 @@ export default function DocsPage() {
               The market maker makes $1,008.62 given the market parameters described above. Market making profitably depends entirely on market values but anytime the collected market fees are greater than the redemption loss, the market maker will profit. The smaller the average size of the share holder, the closer the market maker loss will be to the maximum bounded loss in redemption. The market maker profits in redemption from whales since it means that a large percentage of shares are redeemed below market odds.  
             </p>
           </section>
+            </div>
+          )}
+
+          {activeTab === 'review-boards' && (
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold text-black font-sans mb-4">Review Boards</h1>
+              
+              <h2 className="text-2xl font-bold text-black font-sans mb-3 mt-10">Judging Criteria</h2>
+              <p className="text-gray-800 leading-7 mb-4">
+                Each judge will categorize their final opinion in one of the following buckets:
+              </p>
+              <ol className="list-decimal pl-6 space-y-2 text-gray-800 leading-7 mb-4">
+                <li>No - beyond a reasonable doubt (estimated confidence of 95%)</li>
+                <li>No - clear preponderance of evidence (estimated confidence of 70%)</li>
+                <li>No - inconclusive for both sides (estimated confidence of less than 70%)</li>
+                <li>Yes - clear preponderance of evidence (estimated confidence of 70%)</li>
+                <li>Yes - beyond a reasonable doubt (estimated confidence of 95%)</li>
+              </ol>
+              <p className="text-gray-800 leading-7 mb-4">
+                For the market to resolve &quot;Yes,&quot; two out of three judges need to rule in favor of the &quot;Yes&quot; position, meaning two out of three judges rule either &quot;Yes - clear preponderance of evidence&quot; or &quot;Yes - beyond a reasonable doubt.&quot; Any time less than two judges rules in favor of the &quot;Yes&quot; position, then the market will resolve &quot;No.&quot;
+              </p>
+              <p className="text-gray-800 leading-7 mb-4">
+                After making their decision, the judges will author a case summary where they will review at least the top ten pieces of evidence promoted in the evidence section for each position. They will comment on the authenticity and truthfulness of each document.
+              </p>
+
+              <h2 className="text-lg md:text-xl font-bold text-black font-sans mb-3 mt-10">WSJ History Review Board</h2>
+              
+              <p className="text-gray-800 leading-7 mb-4">
+                The Wall Street Journal appoints the members of review board based on each candidate&apos;s experience in the field and a demonstrated history of telling the truth despite potential consequences.
+              </p>
+              
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. Robert Chen</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Chen is a Professor of American History at Stanford University, specializing in 20th-century political history and intelligence operations. With over 30 years of academic research and teaching experience, he has published extensively on Cold War era events and government institutions. Dr. Chen commits to evaluating all evidence presented in the markets with rigorous historical methodology and impartial analysis, ensuring that market resolutions reflect the most accurate interpretation of available evidence.
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. James Mitchell</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Mitchell is a Distinguished Professor of Modern History at Columbia University, with a focus on presidential history and political scandals. Having dedicated over 30 years to historical research, he has served as a consultant for numerous historical documentaries and publications. Dr. Mitchell pledges to apply the highest standards of historical scholarship in his market evaluations, carefully weighing all evidence and testimony to reach conclusions that honor the integrity of historical truth.
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. Michael Thompson</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Thompson is a Professor Emeritus of History at Harvard University, with expertise in space history and 20th-century technological achievements. With more than 30 years of academic service, he has authored multiple award-winning books on the space race and American technological innovation. Dr. Thompson commits to conducting thorough, unbiased reviews of all market evidence, applying decades of historical research experience to ensure that market resolutions accurately reflect the weight of historical evidence.
+                </p>
+              </div>
+
+              <h2 className="text-lg md:text-xl font-bold text-black font-sans mb-3 mt-10">WSJ Scientific Review Board</h2>
+              
+              <p className="text-gray-800 leading-7 mb-4">
+                The Wall Street Journal appoints the members of review board based on each candidate&apos;s experience in the field and a demonstrated history of telling the truth despite potential consequences.
+              </p>
+              
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. David Anderson</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Anderson is a Professor of Public Health and Epidemiology at Johns Hopkins University, with over 30 years of experience researching population health outcomes and environmental health factors. He has published over 200 peer-reviewed articles on public health interventions and their effects on community health metrics. Dr. Anderson commits to applying rigorous scientific methodology and evidence-based analysis to all market evaluations, ensuring that resolutions are grounded in the highest standards of scientific inquiry and peer-reviewed research.
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. Richard Martinez</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Martinez is a Professor of Immunology and Vaccine Research at the University of California, San Francisco, with more than 30 years of experience in vaccine development and safety research. He has led numerous clinical trials and served on advisory boards for major health organizations. Dr. Martinez pledges to evaluate all market evidence with the same scientific rigor he applies to his research, carefully analyzing data quality, methodology, and statistical significance to ensure market resolutions reflect the most accurate scientific consensus.
+                </p>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-black font-sans mb-2">Dr. Thomas Wilson</h3>
+                <p className="text-gray-800 leading-7 mb-4">
+                  Dr. Wilson is a Professor of Oncology and Molecular Biology at the Mayo Clinic, specializing in cancer epidemiology and the long-term health effects of medical interventions. With over 30 years of clinical and research experience, he has published extensively on cancer risk factors and treatment outcomes. Dr. Wilson commits to conducting comprehensive, objective reviews of all scientific evidence presented in markets, applying his extensive expertise to ensure that resolutions accurately represent the current state of scientific knowledge and research findings.
+                </p>
+              </div>
             </div>
           )}
         </div>

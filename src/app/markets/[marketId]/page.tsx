@@ -1646,7 +1646,7 @@ useEffect(() => {
               <div className="mt-8">
                 <h2 className="text-lg font-bold mb-2">Rules</h2>
                 {splitRules(showRules ? rulesFull : firstLine).map((para, i) => (
-                  <p key={i} className="text-gray-600 text-base mb-2">{para}</p>
+                  <p key={i} className="text-gray-600 text-base mb-2" dangerouslySetInnerHTML={{ __html: para }} />
                 ))}
                 <button
                   className="text-blue-600 text-sm font-medium flex items-center gap-1 focus:outline-none mb-2"
