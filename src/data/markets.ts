@@ -16,7 +16,7 @@ export const markets: Market[] = [
     image: "/JFKCar.png",
     contractAddress: "0xa015eBbaB5c6db0748a504ea71589BE21B2Cbe22", // JFK Market Contract on Base
     outcomes: ["Yes, CIA involved in JFK's death", "No, CIA innocent in JFK's death"],
-    rules: "The market will resolve 'Yes' if current or former CIA personnel aided in the planning or execution of President John F. Kennedy's Assassination. Otherwise, the market will resolve 'No.' This means that no current or former CIA personnel participated in John F. Kennedy's assassination. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ history review board finds that there is a clear preponderance of evidence establishing that current or former CIA personnel aided in the planning or execution of President John F. Kennedy's Assassination.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ history review board did not find a clear preponderance of evidence supporting that current or former CIA personnel aided in the planning or execution of President John F. Kennedy's Assassination."
 
   },
   {
@@ -26,7 +26,7 @@ export const markets: Market[] = [
     image: "/Moon.png",
     contractAddress: "0xeeaca4019f25e573c33a0de266ba0d1020932cc9", // Moon Landing Market Contract on Base
     outcomes: ["Yes, Moon Landing was Fake", "No, Moon Landing was real"],
-    rules: "The market will resolve 'Yes' if Neil Armstrong and Buzz Aldrin physically walked on the moon during the Apollo 11 mission in 1969. Otherwise, the market will resolve 'No.' This means that the Apollo 11 moon landings were faked, staged, or exaggerated to an extent where the Apollo 11 Crew never walked on the moon. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ history review board finds that there is a clear preponderance of evidence establishing that Neil Armstrong and Buzz Aldrin did not physically walk on the moon during the Apollo 11 mission in 1969.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ history review board did not find a clear preponderance of evidence supporting that the Apollo 11 moon landing was fake, staged, or exaggerated to an extent where the Apollo 11 Crew never walked on the moon."
   },
   {
     id: 'fluoridation-iq',
@@ -35,7 +35,7 @@ export const markets: Market[] = [
     image: "/Fluoride.png",
     contractAddress: "0x1fef92c81b4ef16b099330d5cb5981b8bfc69383", // Fluoridation IQ Market Contract on Base - TODO: Update with actual contract address
     outcomes: ["Yes, fluoridation decreases IQ", "No, fluoridation does not decrease IQ"],
-    rules: "The market will resolve 'Yes' if water fluoridation causes a decrease in IQ. Otherwise, the market will resolve 'No.' This means that water fluoridation does not cause a decrease in IQ. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ scientific review board finds that there is a clear preponderance of evidence establishing the link between community water fluoridation and a measurable decline in population-level IQ.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ scientific review board did not find a clear preponderance of evidence supporting the link between community water fluoridation and a measurable decline in population-level IQ."
   },
   {
     id: 'vaccines-autism',
@@ -44,7 +44,7 @@ export const markets: Market[] = [
     image: "/RFK.png", // Placeholder image until we add the actual photo
     contractAddress: "0x9db8664c16dcffb5b1bb8cde365fd174d46b3c25", // Vaccines Autism Market Contract on Base
     outcomes: ["Yes, childhood vaccines linked to autism", "No, childhood vaccines not linked to autism"],
-    rules: "The market will resolve 'Yes' if children following the CDC-recommended childhood vaccine schedule (as of September 18, 2025, linked below) have a higher likelihood of developing Autism Spectrum Disorder over their lifetime compared to unvaccinated children. Otherwise, the market will resolve 'No.' This means children vaccinated according to the CDC schedule are not more likely to develop Autism. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ scientific review board finds that there is a clear preponderance of evidence establishing the link between children following the CDC-recommended childhood vaccine schedule and a higher likelihood of developing Autism Spectrum Disorder over their lifetime compared to unvaccinated children.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ scientific review board did not find a clear preponderance of evidence supporting the link between childhood vaccines and a higher likelihood of developing Autism Spectrum Disorder."
   },
   {
     id: 'trump-epstein',
@@ -53,7 +53,7 @@ export const markets: Market[] = [
     image: "/TrumpEpstein.png", // Placeholder image - you'll need to add this image
     contractAddress: "0xbf7b301d6b0542f2b69da5816eda102bbcc2aaf2", // Trump Epstein Market Contract on Base
     outcomes: ["Yes, Trump a pedophile", "No, Trump not a pedophile"],
-    rules: "The market will resolve 'Yes' if Donald Trump engaged in inappropriate sexual relations with a minor, likely in association with Jeffrey Epstein. Otherwise, the market will resolve 'No.' This means that Donald Trump did not engage in inappropriate sexual relations with a minor. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ history review board finds that there is a clear preponderance of evidence establishing that Donald Trump engaged in inappropriate sexual relations with a minor, likely in association with Jeffrey Epstein.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ history review board did not find a clear preponderance of evidence supporting that Donald Trump engaged in inappropriate sexual relations with a minor, likely in association with Jeffrey Epstein."
   },
   {
     id: 'mrna-turbocancer',
@@ -62,7 +62,7 @@ export const markets: Market[] = [
     image: "/MRNATurboCancer.png", // Placeholder image - you'll need to add this image
     contractAddress: "0xdc57601061c30DCdFbE849e2440CC36A929C7205", // MRNA TurboCancer Market Contract on Base
     outcomes: ["Yes, MRNA vax linked to cancer", "No, MRNA vax not linked to cancer"],
-    rules: "The market will resolve 'Yes' if individuals who received COVID-19 mRNA vaccinations show an increase in cancer rates compared to unvaccinated individuals. Otherwise, the market will resolve 'No.' Indicating that COVID-19 mRNA vaccinations do not cause a rise in cancer rates. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    rules: "The market will resolve \"Yes\" if the WSJ scientific review board finds that there is a clear preponderance of evidence establishing the link between COVID-19 mRNA vaccinations and an increase in cancer rates compared to unvaccinated individuals.\n\nOtherwise, the market will resolve \"No.\" This means the WSJ scientific review board did not find a clear preponderance of evidence supporting the link between COVID-19 mRNA vaccinations and an increase in cancer rates."
   }
 ];
 
