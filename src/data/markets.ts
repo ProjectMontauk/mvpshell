@@ -29,13 +29,13 @@ export const markets: Market[] = [
     rules: "The market will resolve 'Yes' if Neil Armstrong and Buzz Aldrin physically walked on the moon during the Apollo 11 mission in 1969. Otherwise, the market will resolve 'No.' This means that the Apollo 11 moon landings were faked, staged, or exaggerated to an extent where the Apollo 11 Crew never walked on the moon. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
   },
   {
-    id: 'bridgitte-macron',
-    title: "Bridgitte Macron Born a Man?",
-    description: "Was Bridgitte Macron born a man?",
-    image: "/Macron.png",
-    contractAddress: "0x1fef92c81b4ef16b099330d5cb5981b8bfc69383", // Bridgitte Macron Market Contract on Base
-    outcomes: ["Yes, Bridgitte Macron was born a man", "No, Bridgitte Macron was born a female"],
-    rules: "The market will resolve 'Yes' if Bridgitte Macron, the First-Lady of France, was born a man with XY chromosomes. Otherwise, the market will resolve 'No.' This means that Bridgitte Macron was born a female with XX chromosomes or some other non-male combination. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
+    id: 'fluoridation-iq',
+    title: "Does Water Fluoridation Decrease IQ?",
+    description: "Does water fluoridation decrease IQ?",
+    image: "/Fluoride.png",
+    contractAddress: "0x1fef92c81b4ef16b099330d5cb5981b8bfc69383", // Fluoridation IQ Market Contract on Base - TODO: Update with actual contract address
+    outcomes: ["Yes, fluoridation decreases IQ", "No, fluoridation does not decrease IQ"],
+    rules: "The market will resolve 'Yes' if water fluoridation causes a decrease in IQ. Otherwise, the market will resolve 'No.' This means that water fluoridation does not cause a decrease in IQ. The market will resolve as soon as verifiable evidence or consensus emerges after the discovery period ends on March 8th, 2026."
   },
   {
     id: 'vaccines-autism',

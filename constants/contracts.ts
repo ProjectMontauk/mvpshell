@@ -10,9 +10,9 @@ export const conditionalTokensContractAddress = "0xFEE92177cCA79c985b95FB7c14372
 export const moonLandingMarketContractAddress = "0xeeaca4019f25e573c33a0de266ba0d1020932cc9"; // Moon Landing Market Contract on Base
 export const moonLandingConditionalTokensContractAddress = "0x7dFb064Ae49f5A7101C387717f1CDb1b4f2DF7d3"; // Moon Landing Conditional Tokens Contract on Base
 
-// Bridgitte Macron Market Contracts
-export const bridgitteMacronMarketContractAddress = "0x1fef92c81b4ef16b099330d5cb5981b8bfc69383"; // Bridgitte Macron Market Contract on Base
-export const bridgitteMacronConditionalTokensContractAddress = "0xac1365907452b72b4015c7718a165e51439635f6"; // Bridgitte Macron Conditional Tokens Contract on Base
+// Fluoridation IQ Market Contracts
+export const fluoridationIqMarketContractAddress = "0x1fef92c81b4ef16b099330d5cb5981b8bfc69383"; // Fluoridation IQ Market Contract on Base - TODO: Update with actual contract address
+export const fluoridationIqConditionalTokensContractAddress = "0xac1365907452b72b4015c7718a165e51439635f6"; // Fluoridation IQ Conditional Tokens Contract on Base - TODO: Update with actual contract address
 
 // Vaccines Autism Market Contracts
 export const vaccinesAutismMarketContractAddress = "0x9db8664c16dcffb5b1bb8cde365fd174d46b3c25"; // Vaccines Autism Market Contract on Base
@@ -57,17 +57,17 @@ export const moonLandingConditionalTokensContract = getContract({
     address: moonLandingConditionalTokensContractAddress,
   });
 
-// Bridgitte Macron Market Contract Instances
-export const bridgitteMacronMarketContract = getContract({
+// Fluoridation IQ Market Contract Instances
+export const fluoridationIqMarketContract = getContract({
     client,
     chain: base,
-    address: bridgitteMacronMarketContractAddress,
+    address: fluoridationIqMarketContractAddress,
   });
 
-export const bridgitteMacronConditionalTokensContract = getContract({
+export const fluoridationIqConditionalTokensContract = getContract({
     client,
     chain: base,
-    address: bridgitteMacronConditionalTokensContractAddress,
+    address: fluoridationIqConditionalTokensContractAddress,
   });
 
 // Vaccines Autism Market Contract Instances
@@ -119,12 +119,12 @@ export function getContractsForMarket(marketId: string) {
         outcome1PositionId: "97045190584393032725705126979012781984659070008452916210401226821468609683793", // Yes - Base position ID
         outcome2PositionId: "78958204779993795274253300281532453836400562991479897783072243516005340819969", // No - Base position ID
       };
-    case 'bridgitte-macron':
+    case 'fluoridation-iq':
       return {
-        marketContract: bridgitteMacronMarketContract,
-        conditionalTokensContract: bridgitteMacronConditionalTokensContract,
-        outcome1PositionId: "14946061941943856685761247635395957970889875248982696785634054129822017534367", // Yes - Base position ID
-        outcome2PositionId: "75393856958712793303554406582052086676087333995512007275640246125198049807135", // No - Base position ID
+        marketContract: fluoridationIqMarketContract,
+        conditionalTokensContract: fluoridationIqConditionalTokensContract,
+        outcome1PositionId: "14946061941943856685761247635395957970889875248982696785634054129822017534367", // Yes - Base position ID - TODO: Update with actual position IDs
+        outcome2PositionId: "75393856958712793303554406582052086676087333995512007275640246125198049807135", // No - Base position ID - TODO: Update with actual position IDs
       };
     case 'vaccines-autism':
       return {
