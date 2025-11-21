@@ -3,10 +3,10 @@
 import Navbar from '../../../components/Navbar';
 import { BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
-export default function DocsPage() {
+function DocsContent() {
   const searchParams = useSearchParams();
   const tabParam = searchParams?.get('tab');
   const initialTab = (tabParam === 'review-boards' || tabParam === 'idea-futures' || tabParam === 'economics') 
@@ -965,5 +965,25 @@ export default function DocsPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function DocsPage() {
+  return (
+    <Suspense fallback={
+      <div>
+        <Navbar />
+        <main className="min-h-screen bg-white">
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <div className="text-sm text-gray-400 font-sans mb-2">Research</div>
+            <div className="flex gap-4 mb-6 border-b border-gray-200">
+              <div className="pb-2 px-1 font-sans text-lg font-semibold text-gray-500">Loading...</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    }>
+      <DocsContent />
+    </Suspense>
   );
 }
