@@ -3,10 +3,22 @@
 import Navbar from '../../../components/Navbar';
 import { BlockMath } from 'react-katex';
 import 'katex/dist/katex.min.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function DocsPage() {
-  const [activeTab, setActiveTab] = useState<'economics' | 'idea-futures' | 'review-boards'>('economics');
+  const searchParams = useSearchParams();
+  const tabParam = searchParams?.get('tab');
+  const initialTab = (tabParam === 'review-boards' || tabParam === 'idea-futures' || tabParam === 'economics') 
+    ? tabParam 
+    : 'economics';
+  const [activeTab, setActiveTab] = useState<'economics' | 'idea-futures' | 'review-boards'>(initialTab);
+  
+  useEffect(() => {
+    if (tabParam && (tabParam === 'review-boards' || tabParam === 'idea-futures' || tabParam === 'economics')) {
+      setActiveTab(tabParam);
+    }
+  }, [tabParam]);
 
   return (
     <div>
